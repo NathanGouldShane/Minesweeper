@@ -36,16 +36,20 @@ public class Constants {
 
       Expert:
       MAP_HEIGHT = 16;
-      MAP_WIDTH = 30;
+      MAP_WIDTH = 32;
       AMOUNT_OF_MINES = 99;
       AMOUNT_OF_FLAGS = 99;
      */
     /**
      * The height of the map
+     * minimum: 5
+     * maximum: 16
      */
     public static final int MAP_HEIGHT = 16;
     /**
      * The width of the map
+     * minimum: 5
+     * maximum: 32
      */
     public static final int MAP_WIDTH = 16;
     /**
@@ -56,6 +60,7 @@ public class Constants {
      * Medium: 0.15625 * map-size
      * Hard: 0.20625 * map-size
      * }</pre></blockquote>
+     * maximum: ( MAP_HEIGHT * MAP_WIDTH ) - 1
      */
     public static final int AMOUNT_OF_MINES = 40;
     /**
@@ -67,18 +72,20 @@ public class Constants {
      * The factor that determines how big the window is compared to the screen
      * The default value is 80
      * Since the value is a percentage, it should be higher than "0" and shouldn't exceed "100"
-     * Recommended values are in the range of "50" to "100"
+     * Recommended values are in the range of:
+     * "80" to "100" for 1920x1080 resolution
+     * "40" to "50" for 3840x2160 resolution
      */
-    public static final int WINDOW_SCALING_FACTOR = 80;
+    public static final int WINDOW_SCALING_FACTOR = 40;
     //------------------------------------------------------------------------------------------------------------------
 
     // Warning!
-    // The following values should not be tampered with unless you know what you're doing
+    // The following values should not be changed with unless you know what you're doing
 
     /**
      * The location of the Minesweeper.png File
      */
-    public static final String FILE_LOCATION_ICON = "src\\Minesweeper.png";
+    public static final String FILE_LOCATION_ICON = "Minesweeper.png";
 
     // Window values
     /**

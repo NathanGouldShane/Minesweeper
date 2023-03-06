@@ -47,6 +47,7 @@ public class Main {
 
 
     // initialisation methods
+
     /**
      * This method starts a new game
      */
@@ -130,13 +131,11 @@ public class Main {
         LinkedList<Integer> mineLocations = new LinkedList<>();
         int k = 0;
         // Fills the list of viable mine locations with every field, except the one, the player clicked on
-        for (int i = 0; i < Constants.MAP_HEIGHT; i++) {
-            for (int j = 0; j < Constants.MAP_WIDTH; j++) {
-                if (!(i == clickX && j == clickY)) {
+        for (int i = 0; i < Constants.MAP_WIDTH*Constants.MAP_HEIGHT; i++) {
+                if (i != clickX * Constants.MAP_WIDTH + clickY) {
                     viableMineLocations.add(k);
                 }
                 k++;
-            }
         }
         // as long a mines are remaining, a free field is chosen at random and removed from the list of viable locations and added to the list of mine locations
         for (int m = 0; m < Constants.AMOUNT_OF_MINES; m++) {
@@ -181,7 +180,8 @@ public class Main {
     }
 
 
-    // input methods
+    // methods that handle the input
+
     /**
      * This method places or removes the flag on the field
      *
@@ -247,6 +247,9 @@ public class Main {
         // and adds it to the list of coordinates it already checked
         while (!coordinatesToCheck.isEmpty()) {
             String currentCoordinates = coordinatesToCheck.removeFirst();
+            // the coordinates got checked and are getting removed from the coordinates that have to be checked and added to the checked ones
+            // this is done now to save time by not checking the current coordinates
+            checkedCoordinates.add(currentCoordinates);
             String[] splitCurrentCoordinates = currentCoordinates.split(Constants.SEPARATION_TOKEN);
             x = Integer.parseInt(splitCurrentCoordinates[0]);
             y = Integer.parseInt(splitCurrentCoordinates[1]);
@@ -255,16 +258,18 @@ public class Main {
             // the already checked list is there so it doesn't run into an infinite loop
             for (int k = -1; k < 2; k++) {
                 for (int l = -1; l < 2; l++) {
-                    String fieldCoordinates = (x + k) + Constants.SEPARATION_TOKEN + (y + l);
+                    int a = x+k;
+                    int b = y+l;
+                    String fieldCoordinates = a + Constants.SEPARATION_TOKEN + b;
                     // the check on whether or not it already checked the coordinates
                     if (!checkedCoordinates.contains(fieldCoordinates)) {
-                        // it doesn't check itself to save time
-                        if (!(k == 0 && l == 0)) {
-                            // the check of whether or not the coordinates are even on the field
-                            if (checkIfInBounds(x + k, y + l)) {
-                                revealMapCoordinates(x + k, y + l);
+                        // the check whether the coordinates are even on the field
+                        if (checkIfInBounds(a, b)) {
+                            // to check whether the field is not yet revealed
+                            if (shownMap[a][b].equals(FieldContent.UNDISCOVERED)) {
+                                revealMapCoordinates(a, b);
                                 // if the field is also free, it is getting added to the coordinates it has to check
-                                if (hiddenMap[x + k][y + l].equals(FieldContent.FREE)) {
+                                if (shownMap[a][b].equals(FieldContent.FREE)) {
                                     coordinatesToCheck.add(fieldCoordinates);
                                 }
                             }
@@ -272,9 +277,6 @@ public class Main {
                     }
                 }
             }
-            // the coordinates got checked and are getting removed from the coordinates that have to be checked and added to the checked ones
-            coordinatesToCheck.remove(x + Constants.SEPARATION_TOKEN + y);
-            checkedCoordinates.add(x + Constants.SEPARATION_TOKEN + y);
         }
     }
 
@@ -320,6 +322,7 @@ public class Main {
 
 
     // map reveal methods
+
     /**
      * This method assigns the value of the hidden map to the shown map, for the given coordinates
      *
@@ -347,6 +350,7 @@ public class Main {
     }
 
     // getter methods
+
     /**
      * This method gives back the content of the field on the given coordinates
      *
@@ -369,6 +373,7 @@ public class Main {
 
 
     // Miscellaneous methods
+
     /**
      * This method checks, if the values in the Constants.java file do not allow a game to get started
      *
@@ -381,9 +386,9 @@ public class Main {
         // This check is to avoid the game from running of the width of the map is unreasonable
         boolean inValidWidth = Constants.MAP_WIDTH < 5 || Constants.MAP_WIDTH > 32;
         // This check is to avoid that the game can't set the map up properly because more mines than fields exist
-        boolean inValidAmountOfMines = Constants.AMOUNT_OF_MINES >= Constants.MAP_HEIGHT * Constants.MAP_WIDTH;
+        boolean inValidAmountOfMines = Constants.AMOUNT_OF_MINES < 0 || Constants.AMOUNT_OF_MINES >= Constants.MAP_HEIGHT * Constants.MAP_WIDTH;
         // This check is to avoid the window being bigger than the monitor
-        boolean inValidScalingFactor = Constants.WINDOW_SCALING_FACTOR < 30 || Constants.WINDOW_SCALING_FACTOR > 100;
+        boolean inValidScalingFactor = Constants.WINDOW_SCALING_FACTOR < 0 || Constants.WINDOW_SCALING_FACTOR > 100;
         // note: coded in such a way to allow for further checks to be added in the future if needed
         return inValidHeight && inValidWidth && inValidAmountOfMines && inValidScalingFactor;
     }
