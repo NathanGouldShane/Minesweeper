@@ -76,7 +76,7 @@ public class Constants {
      * "80" to "100" for 1920x1080 resolution
      * "40" to "50" for 3840x2160 resolution
      */
-    public static final int WINDOW_SCALING_FACTOR = 40;
+    public static final int WINDOW_SCALING_FACTOR = 80;
     //------------------------------------------------------------------------------------------------------------------
 
     // Warning!
@@ -85,7 +85,7 @@ public class Constants {
     /**
      * The location of the Minesweeper.png File
      */
-    public static final String FILE_LOCATION_ICON = "Minesweeper.png";
+    public static final String FILE_LOCATION_ICON = "src\\Minesweeper.png";
 
     // Window values
     /**
