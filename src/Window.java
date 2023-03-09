@@ -105,10 +105,11 @@ public class Window extends JFrame {
 
     /**
      * This method adds the given component at the given location to the given panel
-     * @param component The given component
+     *
+     * @param component          The given component
      * @param horizontalLocation The given horizontal location
-     * @param verticalLocation The given vertical location
-     * @param panel The given panel
+     * @param verticalLocation   The given vertical location
+     * @param panel              The given panel
      */
     private void placeComponentOnCoordinatesWithGBC(JComponent component, int horizontalLocation, int verticalLocation, JPanel panel) {
         gbc.gridx = horizontalLocation;
@@ -128,6 +129,7 @@ public class Window extends JFrame {
     }
 
     // These methods help in the creation of the window
+
     /**
      * This method initializes the menu panel
      */
@@ -245,6 +247,7 @@ public class Window extends JFrame {
 
     /**
      * This method gives back the mouse-listener for a field button
+     *
      * @param x The vertical position of the field button on the field
      * @param y The horizontal position of the field button on the field
      * @return The mouse-listener of the field button
@@ -289,8 +292,10 @@ public class Window extends JFrame {
     }
 
     // input methods
+
     /**
      * This method handles the left mouse click of the field button on the given coordinates
+     *
      * @param x The vertical position of the field button on the field
      * @param y The horizontal position of the field button on the field
      */
@@ -303,8 +308,8 @@ public class Window extends JFrame {
         } else {
             // to only change the face into a scared one, when it is needed
             if (gameState == GameState.DEFAULT && !button.getText().matches(Constants.REGEX_NOT_SCARED)) {
-                    gameState = GameState.CLICKED;
-                    updateEmoticonButton();
+                gameState = GameState.CLICKED;
+                updateEmoticonButton();
             }
         }
     }
@@ -315,6 +320,7 @@ public class Window extends JFrame {
 
     /**
      * This method handles the left mouse click of the field button on the given coordinates
+     *
      * @param x The vertical position of the field button on the field
      * @param y The horizontal position of the field button on the field
      */

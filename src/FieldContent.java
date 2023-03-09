@@ -1,5 +1,6 @@
 /**
  * This is the enum for the different field-contents
+ *
  * @author Jonathan Matscheko
  * @version 1.0
  */
@@ -22,6 +23,7 @@ public enum FieldContent {
 
     /**
      * This is the constructor method
+     *
      * @param name The name of the FieldContent
      */
     FieldContent(String name) {
@@ -30,12 +32,13 @@ public enum FieldContent {
 
     /**
      * This method parses the given string into a FieldContent
+     *
      * @param integer The given integer
      * @return The returned FieldContent
      */
     public static FieldContent toFieldContent(int integer) {
         String numberAsString = String.valueOf(integer);
-        for (FieldContent fieldContent: FieldContent.values()) {
+        for (FieldContent fieldContent : FieldContent.values()) {
             if (numberAsString.equals(fieldContent.name)) {
                 return fieldContent;
             }
