@@ -76,7 +76,7 @@ public class Constants {
      * "80" to "100" for 1920x1080 resolution
      * "40" to "50" for 3840x2160 resolution
      */
-    public static final int WINDOW_SCALING_FACTOR = 80;
+    public static final int WINDOW_SCALING_FACTOR = 100;
     //------------------------------------------------------------------------------------------------------------------
 
     // Warning!
