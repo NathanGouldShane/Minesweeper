@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.Collections;
 import java.util.LinkedList;
 
 /**
@@ -279,6 +280,7 @@ public class Main {
         // whether the hint is getting shown or hidden
         if (show) {
             // the next viable hint coordinates are used
+            Collections.shuffle(safeCoordinates);
             for (String hintCoordinates : safeCoordinates) {
                 String[] splitHintCoordinates = hintCoordinates.split(Constants.SEPARATION_TOKEN);
                 int hintX = Integer.parseInt(splitHintCoordinates[0]);
